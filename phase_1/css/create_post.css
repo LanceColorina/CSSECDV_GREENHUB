@@ -1,0 +1,90 @@
+@import url(styles.css);
+
+body {
+    padding-top: 80px;
+    height: 100vh;
+}
+
+.container {
+    padding: 50px;
+    width: 424px;
+    height: 580px;
+    flex-direction: center;
+    background-color: white;
+    box-shadow: var(--shadow);
+    border-radius: 10px;
+    margin: 40px auto;
+}
+
+h1 {
+    margin: 0 0 0px 0;
+    font-weight: 500;
+    font-size: 28px;
+}
+
+button {
+    display: block;
+    margin-right: auto;
+    padding: 10px;
+    width: 100px;
+    border: none;
+    color: white;
+    background-color: var(--primary);
+}
+
+.tag {
+    font-weight: 280;
+    width: 420px;
+    height: 37px;
+    box-shadow: var(--shadow-2);
+    border:none;
+    padding: 10px;
+}
+
+.field {
+    margin-bottom: 25px;
+}
+
+.field label {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.field input {
+    padding: 10px;
+    width: 400px;
+    border: none;
+    background-color: white;
+    box-shadow: var(--shadow-2);
+}
+#paragraph{
+    padding: 10px;
+    width: 400px;
+    height: 200px;
+    border: none;
+    background-color: white;
+    box-shadow: var(--shadow-2);
+}
+.navbar{
+    height:70px;
+}
+#text{
+    width: 500px;
+    height: 250px;
+    text-align: st;
+}
+
+.create-post-submit{
+    display:flex;
+    padding-right:27px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+}
+

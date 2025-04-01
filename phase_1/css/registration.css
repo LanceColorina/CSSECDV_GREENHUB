@@ -1,0 +1,89 @@
+@import url(styles.css);
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.removehyperlink{
+    color:white;
+    text-decoration: none;
+}
+
+.container {
+    padding: 75px;
+    background-color: white;
+    box-shadow: var(--shadow);
+    border-radius: 10px;
+}
+
+h1 {
+    margin: 0 0 25px 0;
+    font-weight: 500;
+    font-size: 28px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 25px;
+}
+
+.field {
+    margin-bottom: 25px;
+}
+
+.field label {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.field input {
+    padding: 10px;
+    width: 350px;
+    border: none;
+    background-color: white;
+    box-shadow: var(--shadow-2);
+}
+
+.other-options {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.other-options div {
+    display: flex;
+}
+
+.other-options label {
+    margin-left: 5px;
+}
+
+button {
+    display: block;
+    margin: 25px auto;
+    padding: 10px;
+    width: 375px;
+    border: none;
+    color: white;
+    background-color: var(--primary);
+}
+
+.note {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.home-link {
+    text-align: center;
+}
+
+.home-link a {
+    padding: 8px 12px;
+    border-radius: 5px;
+    color: var(--primary);
+    background-color: var(--secondary);
+}

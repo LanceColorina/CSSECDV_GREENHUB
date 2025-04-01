@@ -1,0 +1,16 @@
+@import url(styles.css);
+@import url(main.css);
+.title {
+    margin: 50px auto;
+    text-align: center;
+    font-weight: 500;
+}
+
+.about-container {
+    margin: 0 auto;
+    padding: 50px;
+    width: 500px;
+    height: auto;
+    box-shadow: var(--shadow);
+    background-color: white;
+}

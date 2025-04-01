@@ -1,0 +1,36 @@
+@import url(styles.css);
+@import url(main.css);
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.post-container{
+    width:50%;
+}
+
+#go-back-button{
+    font-size:larger;
+    position:fixed;
+    top:20px;
+    right:20px;
+}
+
+.bi-arrow-return-left{
+    color:white;
+}
+
+.post-edit{
+    display:flex;
+    justify-content: space-between;
+}
+
+.bi-pencil, .bi-trash, .bi-flag {
+    padding:10px 15px;
+    border-radius: 10px;
+}
+
+.bi-pencil:hover, .bi-trash:hover, .bi-flag:hover{
+    background-color: var(--gray-100);
+}

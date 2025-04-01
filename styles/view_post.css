@@ -1,0 +1,143 @@
+@import url(styles.css);
+@import url(main.css);
+.view-body {
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.post-container {
+  margin-top: 50px;
+  width: 50%;
+}
+
+#go-back-button {
+  font-size: larger;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.bi-arrow-return-left {
+  color: white;
+}
+
+.post-edit {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bi-pencil,
+.bi-trash,
+.bi-flag,
+.bi-flag-fill {
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+
+.bi-pencil:hover,
+.bi-trash:hover,
+.bi-flag:hover,
+.bi-flag-fill:hover {
+  background-color: var(--gray-100);
+}
+
+.edit-area {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-input {
+  width: 200px;
+  height: 30px;
+  border: hidden;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 5px;
+  padding-left: 5px;
+}
+.edit-submit {
+  border: hidden;
+  border-radius: 10px;
+  min-width: auto;
+}
+.edit-submit:hover {
+  background-color: #7ace99;
+}
+.labels {
+  font-size: larger;
+}
+
+.tags {
+  margin: 8px 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.each-tag {
+  margin-right: 10px;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 15px;
+  color: var(--primary);
+  box-shadow: var(--shadow-1);
+  background-color: var(--secondary);
+}
+
+.edited-text {
+  border-radius: 10px;
+  text-shadow: h-shadow v-shadow blur-radius color;
+  color: rgb(128, 107, 107);
+  font-weight: 300;
+}
+
+.edit-delete-comments {
+  margin: 10px;
+  display: flex;
+  size: 1px;
+  justify-content: space-evenly;
+}
+
+.icon {
+  margin-left: 5px;
+  padding: 2px;
+  border-radius: 3px;
+}
+.icon:hover {
+  background-color: #7ace99;
+}
+
+.edited-comment {
+  font-size: xx-small;
+  font-style: normal;
+  justify-content: end;
+}
+
+.edited-text {
+  margin: 0;
+}
+
+#separate-date-and-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#date {
+  padding-left: 10px;
+}
+.h1-title {
+  margin: 0;
+  padding: 0;
+  font-size: 1.8em;
+  color: black;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+}
+
+.loading{
+  display:flex;
+  margin:50px auto;
+  justify-content: center;
+
+}

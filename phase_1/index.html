@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Homepage</title>
+</head>
+<body>
+    <script src="js/index.js"></script>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="media/logo.jpg" alt="" class="logo">
+            <div class="nav-links">
+                <a href="about.html" class="btn-tertiary">About</a>
+                <a href="developers.html" class="btn-tertiary">Developers</a>
+            </div>
+        </div>
+    
+        <!-- if user is not authenticated -->
+        <div class="registration-links">
+            <a href="login.html" class="btn-secondary">Log in</a>
+            <a href="signup.html" class="btn-primary">Sign up</a>
+        </div>
+    
+        <!-- else if user is authenticated -->
+        <!-- <div class="user-profile-link">
+            <p><i class="bi bi-person"></i> Franz Zapanta</p>
+            <img src="media/franz.jpeg" alt="">
+        </div> -->
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+
+        <!-- Main Section (LEFT-SIDE) -->
+        <section>
+            
+            <button class="btn-primary" id="scrollup-button" onclick="scrollup()"><i class="fa fa-sort-asc"></i></button>
+            
+        
+            <div class="sort-posts-container">
+                <button class="sort-button" ><i class="bi bi-stars"></i> Latest</button>
+                <button class="sort-button" ><i class="bi bi-fire"></i> Popular</button>
+            </div><hr>
+
+            <div class="posts-wrapper">
+                <h1><i class="bi bi-stars"></i> Latest Posts</h1>
+                
+                    <div class="post-container">
+                        <a href="viewpost.html" class="removehyperlink">
+                            <div class="content">
+                                <h1>Welcome to DLSU</h1>
+                                <p>How is it so far?</p>
+                            </div>
+                        </a>
+                        <div class="options"><button class="like" onclick="likeUp(0)"><a><span class="like-change"><i id="thumbs-up" class="bi bi-hand-thumbs-up"></i></span><span class="like-amount">25</span></a></button>
+                            <button class="dislike" onclick="dislikeUp(0)"><a><span class="dislike-change"><i id="thumbs-down" class="bi bi-hand-thumbs-down"></i></span><span class="dislike-amount">10</span></a></button>
+                            
+                            <button class="comment" onclick="showNewComment()" id=><a><i class="bi bi-chat-dots"></i> 5 Comments</a></button>
+                        </div>
+                    </div>
+                        <div class="post-container">
+                            <div class="content">
+                                <h1>Who wants to party?</h1>
+                                <p>Lets meet up and make a memorable night!!!</p>
+                            </div>
+                            <div class="options">
+                                <button class="like" onclick="likeUp(1)"><a><span class="like-change"><i id="thumbs-up" class="bi bi-hand-thumbs-up"></i></span><span class="like-amount">25</span></a></button>
+                                <button class="dislike" onclick="dislikeUp(1)"><a><span class="dislike-change"><i id="thumbs-down" class="bi bi-hand-thumbs-down"></i></span><span class="dislike-amount">10</span></a></button>
+                                <button class="comment" onclick="showNewComment()" id=><a><i class="bi bi-chat-dots"></i> 5 Comments</a></button>
+                            </div>
+                        </div>
+
+    
+                <div class="post-container">
+                    <div class="content">
+                        <h1>Anyone up for some late night studying?</h1>
+                        <p>Will be staying here in cads if anyone want to study with me :3 </p>
+                    </div>
+                    <div class="options">
+                        <button class="like" onclick="likeUp(2)"><a><span class="like-change"><i id="thumbs-up" class="bi bi-hand-thumbs-up"></i></span><span class="like-amount">25</span></a></button>
+                        <button class="dislike" onclick="dislikeUp(2)"><a><span class="dislike-change"><i id="thumbs-down" class="bi bi-hand-thumbs-down"></i></span><span class="dislike-amount">10</span></a></button>
+                        <button class="comment" onclick="showNewComment()" id=><a><i class="bi bi-chat-dots"></i> 5 Comments</a></button>
+                    </div>
+                </div>
+
+                <div class="post-container">
+                    <div class="content">
+                        <h1>Tra BGC pareh</h1>
+                        <p>Let's hanap some shawties pareh</p>
+                    </div>
+                    <div class="options">
+                        <button class="like" onclick="likeUp(3)"><a><span class="like-change"><i id="thumbs-up" class="bi bi-hand-thumbs-up"></i></span><span class="like-amount">25</span></a></button>
+                        <button class="dislike" onclick="dislikeUp(3)"><a><span class="dislike-change"><i id="thumbs-down" class="bi bi-hand-thumbs-down"></i></span><span class="dislike-amount">10</span></a></button>
+                        <button class="comment" onclick="showNewComment()" id=><a><i class="bi bi-chat-dots"></i> 5 Comments</a></button>
+                    </div>
+                </div>
+
+                <div class="post-container">
+                    <div class="content">
+                        <h1>Goodmorning everyone!!!</h1>
+                        <p></p>
+                    </div>
+                    <div class="options">
+                        <button class="like" onclick="likeUp(4)"><a><span class="like-change"><i id="thumbs-up" class="bi bi-hand-thumbs-up"></i></span><span class="like-amount">25</span></a></button>
+                        <button class="dislike" onclick="dislikeUp(4)"><a><span class="dislike-change"><i id="thumbs-down" class="bi bi-hand-thumbs-down"></i></span><span class="dislike-amount">10</span></a></button>
+                        <button class="comment" onclick="showNewComment()" id=><a><i class="bi bi-chat-dots"></i> 5 Comments</a></button>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button class="btn-primary">Load More</button>
+            </div>
+        </section>
+
+        <!-- Others Section (RIGHT-SIDE) -->
+        <!-- <section class="RIGHT-SIDE"> 
+            <div class="container">
+                <h1>Welcome Back Lance</h1>
+                 insert image or profile 
+            </div>
+
+            <div>
+                <a href="about.html">About</a>
+                <a href="developers.html">Developers</a>
+
+                <a href="signup.html">Join Now</a>
+            </div>
+        </section> -->
+    </div>
+    <script defer src="js/index.js"></script>
+
+</body>
+</html>

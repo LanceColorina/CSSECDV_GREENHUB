@@ -1,0 +1,31 @@
+import Post from "@/models/Post";
+import connect from "@/utils/db";
+import { NextResponse } from "next/server";
+
+export async function GET(request: any) {
+  try {
+    await connect();
+
+    const url = new URL(request.url);
+    const searchParams = new URLSearchParams(url.searchParams);
+    const postId = searchParams.get("postId");
+    const title = searchParams.get("title"); 
+    const body = searchParams.get("body");
+    let updateFields: any = {};
+    if (title !== null && title !== "") {
+      updateFields.title = title;
+    }
+    if (body !== null && body !== "") {
+      updateFields.body = body;
+    }
+    updateFields.isEdited = true;
+    const post = await Post.findOneAndUpdate(
+        { _id: postId },
+        updateFields,
+        { new: true } // To return the updated document
+    );
+    return NextResponse.json({ post });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 400 });
+  }
+}

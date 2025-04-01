@@ -1,0 +1,47 @@
++ ------------ +
+| IMPORTANT!!! |
++ ------------ +
+1. Always run "git pull" first before making any changes to your local 
+  code to ensure you have the latest updates from the remote repository.
+
++ ------- +
+| NEXT.JS |
++ ------- +
+1. When modifying a model, restart server by running `npm run dev` on the terminal.
+2. Create API endpoints and send requests to those endpoints when adding/retrieving
+   something from the database.
+
+
++ --------------------- +
+| Committing to Github: |
++ --------------------- +
+1. git add .
+2. git commit -m "Insert your msg..."
+3. git checkout -b dev-branch (Create and switch to a new branch named dev-branch)
+4. git push -u origin dev-branch (Push the new branch to the remote repository)
+5. Open pull request on Github and merge 
+6. git checkout master (Switch back to the master branch)
+7. git pull origin master (Update your local master branch with any changes from the 
+   remote master branch, in case there were any new changes while you were working on 
+   the dev-branch)
+8. git branch -D dev-branch (Deletes the local dev-branch)
+9. git push origin --delete dev-branch (Deletes the remote dev-branch)
+
++ -------------------------- +
+| Other useful git commands: |
++ -------------------------- +
+1. "git branch" - check which branch you're currently on
+2. "git merge <branch-name>" - merges two branches
+
++-------------------------------------------- +
+| When your local repo is behind remote repo: |
++ ------------------------------------------- +
+1. Run git pull to get the latest updates from the remote repository.
+2. If there are any conflicts, you'll need to manually resolve them.
+3. You can use a merge tool or resolve conflicts directly in your code editor.
+4. After resolving conflicts, complete the merge by adding and committing the changes.
+
+Username: green-hub
+Password: OeDohGeGwhP9Mgop
+
+mongodb+srv://green-hub:<password>@cluster0.zchfvki.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0

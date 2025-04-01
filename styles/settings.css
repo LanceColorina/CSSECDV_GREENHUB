@@ -1,0 +1,748 @@
+@import url(styles.css);
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+hr {
+  border: 1px solid var(--gray-200);
+}
+
+.container {
+  width: 75vw;
+  height: 75vh;
+  display: flex;
+  flex-direction: row;
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+  background-color: white;
+}
+
+.container .options {
+  padding: 25px;
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--primary);
+  box-sizing: border-box;
+}
+
+.container .options ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.container .options ul a {
+  color: white;
+  text-decoration: none;
+}
+
+.container .options ul li {
+  margin-bottom: 5px;
+  padding: 12px 25px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.container .options ul:nth-of-type(2) li {
+  margin-bottom: 0;
+  background-color: var(--primary-dark);
+}
+
+.container .options ul:nth-of-type(2) li:hover {
+  background-color: var(--primary-darker);
+}
+
+.container .options ul li:hover {
+  background-color: var(--primary-dark);
+}
+
+.container .options ul li i {
+  margin-right: 5px;
+}
+
+
+
+.container .my-profile-content {
+  padding: 50px;
+  width: 75%;
+  box-sizing: border-box;
+}
+
+.container .my-profile-content .my-profile-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.container .my-profile-content .my-profile-wrapper > div:nth-of-type(1) {
+  height: 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.container .my-profile-content .my-profile-wrapper > div:nth-of-type(1) h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.container .my-profile-content .my-profile-wrapper > div:nth-of-type(1) i {
+  padding: 10px 14px;
+  height: 10%;
+  border-radius: 100%;
+  color: white;
+  background-color: var(--primary);
+  box-shadow: var(--shadow-3);
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(1)
+  i:hover {
+  background-color: var(--primary-dark);
+}
+
+.container .my-profile-content .my-profile-wrapper > div:nth-of-type(2) {
+  padding: 15px;
+  height: 85%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(1) {
+  width: 45%;
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(1)
+  > div:nth-of-type(1) {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--gray-300);
+  border-radius: 5px;
+  background-color: var(--gray-100);
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(1)
+  > div:nth-of-type(1)
+  small {
+  margin-bottom: 5px;
+  font-size: 0.8rem;
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(1)
+  > div:nth-of-type(1)
+  img {
+  margin: 5px 0 15px 0;
+  border-radius: 100%;
+  width: 125px;
+  height: 125px;
+  object-fit: cover;
+  box-shadow: var(--shadow-3);
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(1)
+  > div:nth-of-type(1)
+  input {
+  padding: 10px 12px;
+  font-size: 0.8rem;
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(1)
+  > div:nth-of-type(1)
+  input:hover {
+  background-color: var(--primary-dark);
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(1)
+  > div:nth-of-type(2) {
+  padding: 25px;
+  width: 100%;
+  border: 1px solid var(--gray-300);
+  border-radius: 5px;
+  background-color: var(--gray-100);
+  box-sizing: border-box;
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(1)
+  > div:nth-of-type(2)
+  div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(1)
+  > div:nth-of-type(2)
+  h3 {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(1)
+  > div:nth-of-type(2)
+  a {
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: var(--primary);
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(1)
+  > div:nth-of-type(2)
+  a:hover {
+  text-decoration: underline;
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(2) {
+  width: 45%;
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(2)
+  .edit-username-form {
+  width: 100%;
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(2)
+  .edit-username-form
+  label {
+  font-size: 0.8rem;
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(2)
+  .edit-username-form
+  div {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(2)
+  .edit-username-form
+  input {
+  padding: 10px 12px;
+  width: 75%;
+  border: 1px solid var(--gray-300);
+  border-radius: 5px;
+  background-color: var(--gray-100);
+  box-sizing: border-box;
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(2)
+  .edit-username-form
+  button {
+  padding: 0;
+  width: 20%;
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(2)
+  .edit-username-form
+  button:hover {
+  background-color: var(--primary-dark);
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(2)
+  > div:not(:last-child) {
+  padding: 5px 10px;
+  width: 100%;
+  border-left: 3px solid var(--primary);
+  border-radius: 5px;
+  background-color: var(--secondary);
+  box-sizing: border-box;
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(2)
+  > div
+  small {
+  font-size: 0.8rem;
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(2)
+  > div
+  h3 {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(2)
+  > div:last-child {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(2)
+  > div:last-child
+  span {
+  color: var(--primary);
+  font-size: 0.8rem;
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(2)
+  > div:last-child
+  button {
+  padding: 10px 12px;
+  font-size: 0.8rem;
+}
+
+.container
+  .my-profile-content
+  .my-profile-wrapper
+  > div:nth-of-type(2)
+  > div:nth-of-type(2)
+  > div:last-child
+  button:hover {
+  background-color: var(--primary-dark);
+}
+
+.container .my-posts-content {
+  width: 75%;
+}
+
+.container .my-posts-content .my-posts-wrapper {
+  padding: 50px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.container .my-posts-content .my-posts-wrapper > div:nth-of-type(1) {
+  height: 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container .my-posts-content .my-posts-wrapper > div:nth-of-type(1) h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.container .my-posts-content .my-posts-wrapper > div:nth-of-type(1) span {
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  color: var(--primary);
+  border-left: 3px solid var(--primary);
+  border-radius: 5px;
+  background-color: var(--secondary);
+  box-sizing: border-box;
+}
+
+
+
+.container .my-posts-content .my-posts-wrapper > div:nth-of-type(2) {
+  padding: 15px;
+  width: 100%;
+  height: 90%;
+  box-sizing: border-box;
+  overflow: scroll;
+  -ms-overflow-style: none; /* Hide scrollbar for IE, Edge and Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.container
+  .my-posts-content
+  .my-posts-wrapper
+  > div:nth-of-type(2)::-webkit-scrollbar {
+  display: none;
+}
+
+.container .my-posts-content .my-posts-wrapper > div:nth-of-type(2) > a {
+  text-decoration: none;
+  color: black;
+}
+
+.container
+  .my-posts-content
+  .my-posts-wrapper
+  > div:nth-of-type(2)
+  .post-container {
+  margin-top: 25px;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--gray-300);
+  border-radius: 5px;
+  background-color: white;
+  box-sizing: border-box;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.container
+  .my-posts-content
+  .my-posts-wrapper
+  > div:nth-of-type(2)
+  .post-container:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-3);
+}
+
+.container
+  .my-posts-content
+  .my-posts-wrapper
+  > div:nth-of-type(2)
+  .post-container:last-of-type {
+  margin-bottom: 0;
+}
+
+.container
+  .my-posts-content
+  .my-posts-wrapper
+  > div:nth-of-type(2)
+  .post-container
+  > div:nth-of-type(1) {
+  padding: 5px 15px;
+  width: 100%;
+  border-bottom: 1px solid var(--gray-300);
+  border-radius: 5px 5px 0 0;
+  background-color: var(--gray-100);
+  box-sizing: border-box;
+  text-align: right;
+}
+
+.container
+  .my-posts-content
+  .my-posts-wrapper
+  > div:nth-of-type(2)
+  .post-container
+  > div:nth-of-type(1)
+  span {
+  font-size: 0.8rem;
+  color: var(--gray-500);
+}
+
+.container
+  .my-posts-content
+  .my-posts-wrapper
+  > div:nth-of-type(2)
+  .post-container
+  > div:nth-of-type(1)
+  span
+  i {
+  margin-right: 3px;
+}
+
+.container
+  .my-posts-content
+  .my-posts-wrapper
+  > div:nth-of-type(2)
+  .post-container
+  > div:nth-of-type(2) {
+  padding: 15px 25px;
+}
+
+.container
+  .my-posts-content
+  .my-posts-wrapper
+  > div:nth-of-type(2)
+  .post-container
+  > div:nth-of-type(2)
+  h1 {
+  margin: 0 0 5px 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.container
+  .my-posts-content
+  .my-posts-wrapper
+  > div:nth-of-type(2)
+  .post-container
+  > div:nth-of-type(2)
+  p {
+  margin: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  text-overflow: ellipsis;
+  font-size: 0.8rem;
+}
+
+.container .my-comments-content {
+  width: 75%;
+}
+
+.container .my-comments-content .my-comments-wrapper {
+  padding: 50px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.container .my-comments-content .my-comments-wrapper > div:nth-of-type(1) {
+  margin: 0;
+  height: 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container .my-comments-content .my-comments-wrapper > div:nth-of-type(1) h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.container .my-comments-content .my-comments-wrapper > div:nth-of-type(1) span {
+  padding: 5px 10px;
+  height: max-content;
+  font-size: 0.8rem;
+  color: var(--primary);
+  border-left: 3px solid var(--primary);
+  border-radius: 5px;
+  background-color: var(--secondary);
+  box-sizing: border-box;
+}
+
+.container .my-comments-content .my-comments-wrapper > div:nth-of-type(2) {
+  padding: 15px;
+  width: 100%;
+  height: 85%;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* Hide scrollbar for IE, Edge and Firefox */
+  box-sizing: border-box;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.container
+  .my-comments-content
+  .my-comments-wrapper
+  > div:nth-of-type(2)::-webkit-scrollbar {
+  display: none;
+}
+
+.container
+  .my-comments-content
+  .my-comments-wrapper
+  > div:nth-of-type(2)
+  .comment-container {
+  margin-bottom: 25px;
+  width: 100%;
+  border: 1px solid var(--gray-300);
+  border-radius: 5px;
+  background-color: white;
+  box-sizing: border-box;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.container
+  .my-comments-content
+  .my-comments-wrapper
+  > div:nth-of-type(2)
+  .comment-container:last-child {
+  margin-bottom: 0;
+}
+
+.container
+  .my-comments-content
+  .my-comments-wrapper
+  > div:nth-of-type(2)
+  .comment-container:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-3);
+}
+
+.container
+  .my-comments-content
+  .my-comments-wrapper
+  > div:nth-of-type(2)
+  .comment-container
+  div {
+  padding: 5px 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--gray-300);
+  border-radius: 5px 5px 0 0;
+  background-color: var(--gray-100);
+}
+
+.container
+  .my-comments-content
+  .my-comments-wrapper
+  > div:nth-of-type(2)
+  .comment-container
+  span {
+  margin-left:px;
+  font-size: 0.8rem;
+  color: var(--gray-500);
+}
+
+.container
+  .my-comments-content
+  .my-comments-wrapper
+  > div:nth-of-type(2)
+  .comment-container
+  span
+  a {
+  font-weight: 600;
+  color: var(--gray-500);
+  text-decoration: none;
+}
+
+.container
+  .my-comments-content
+  .my-comments-wrapper
+  > div:nth-of-type(2)
+  .comment-container
+  span
+  a:hover {
+  text-decoration: underline;
+}
+
+.container
+  .my-comments-content
+  .my-comments-wrapper
+  > div:nth-of-type(2)
+  .comment-container
+  p {
+  padding: 0 25px;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  font-size: 0.8rem;
+  color:black;
+}
+
+.bio-input {
+  border-radius: 5px;
+  width: 240px;
+}
+.bio-button {
+  border-radius: 10px;
+  left: 100px;
+}
+
+.removehyperlink {
+  text-decoration: none;
+  margin: 5px;
+  color: none;
+}
+.bi-calendar4-event{
+  color:black;
+}

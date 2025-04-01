@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/viewpost.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <a href="mainhub.html"><button class="btn-primary" id="go-back-button" ><i class="bi bi-arrow-return-left"></i></button></a>
+    <div class="post-container view-post-container">
+        <div class="content">
+            <div class="post-edit">
+                <p class="post-account">Lance</p>
+                <div >
+                    <i class="bi bi-pencil"></i>
+                    <i class="bi bi-flag"></i>
+                    <i class="bi bi-trash"></i>
+                </div>
+            </div>
+            <h1>Welcome to DLSU</h1>
+            <p>How is it so far?</p>
+        </div>
+        <div class="options">
+            <button class="like" onclick="likeUp(0)"><a><span class="like-change"><i id="thumbs-up" class="bi bi-hand-thumbs-up"></i></span><span class="like-amount">25</span></a></button>
+                            <button class="dislike" onclick="dislikeUp(0)"><a><span class="dislike-change"><i id="thumbs-down" class="bi bi-hand-thumbs-down"></i></span><span class="dislike-amount">10</span></a></button>
+            <button class="comment" onclick="showNewComment()"><a><i class="bi bi-chat-dots"></i> 5 Comments</a></button>
+        </div>
+        <div class="new-comment-area" id="comment-area">
+            <input type="text" class="new-comment" placeholder="Write a comment..." id="comment-box">
+            <button class='comment-submit' onclick="submitComment()"><i class="bi bi-send-arrow-down-fill"></i></button>
+        </div>
+        <div class="comments" id="comment-list">
+            <div class="comment-line">
+                <p class="user-comment">Lance:</p>
+                <p class="comment-content">Hello</p>
+            </div>
+            <div class="comment-line">
+                <p class="user-comment">Franz:</p>
+                <p class="comment-content">Hi</p>
+            </div>  
+        </div>
+    </div>
+    <script defer src="js/index.js"></script>
+</body>
+</html>

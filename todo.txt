@@ -1,0 +1,22 @@
+STATUS LEGEND:
+[X] - completed
+[*] - in progress
+[Insert status...] - blank
+
+TO DO:
+[Lance] [Insert status...] - Place comments under the actual post (improve placement)
+[Gio] [Insert status...] - we can display the navbar when expanding posts
+[Franz] [X] - Change create post input to button instead
+[Nelcze] [Insert status...] - Create admin page
+[Franz] [X] - Add report functionality
+[Lance] [Insert status...] - Add option to include images to posts
+[Gio] [X] - Add categories 
+[Gio] [X] - Remove right panel
+          - Transfer other links to navbar
+          - Center posts 
+
+DEADLINE: 
+1. Revisions - Feb 21
+2. Transfering to react - Feb 28
+3. Database & Implementing Features - March 5
+4. Finalization - March 7

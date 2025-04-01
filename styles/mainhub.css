@@ -1,0 +1,99 @@
+@import url(styles.css);
+@import url(main.css);
+#body {
+  padding: 80px 0 0 0;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 500px;
+}
+
+.main-wrapper .create-post-btn {
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+
+.main-wrapper .create-post-btn div {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding: 12px;
+  border-radius: 5px;
+  transition: linear 0.3s;
+  outline: 1px solid var(--primary);
+  outline-offset: 3px;
+  background-color: var(--primary);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.main-wrapper .create-post-btn div:hover {
+  box-shadow: var(--shadow-4);
+  background-color: var(--primary-dark);
+}
+
+.main-wrapper .create-post-btn div span {
+  margin-left: 5px;
+}
+
+.btn-tertiary {
+  margin: 10px;
+}
+.search-and-latest {
+  margin-bottom: 15px;
+  font-weight: 400;
+}
+#search-align {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.searching-button {
+  position: relative;
+  right: -60px;
+  border: hidden;
+  border-radius: 5px;
+}
+.searching-button:hover {
+  background-color: #7ace99;
+}
+
+.tags {
+  margin: 8px 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.each-tag {
+  margin-right: 10px;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 15px;
+  color: var(--primary);
+  box-shadow: var(--shadow-1);
+  background-color: var(--secondary);
+}
+
+#scrollup-button {
+  padding: 12px 25px;
+  border-radius: 8px;
+  border: none;
+  text-decoration: none;
+  color: white;
+  background-color: #16a34a;
+}
+.h1-title {
+  margin: 0;
+  padding: 0;
+  color: black;
+  font-weight: 500;
+  font-size: 1.5em;
+  font-family: "Poppins", sans-serif;
+}

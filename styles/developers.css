@@ -1,0 +1,65 @@
+@import url(styles.css);
+@import url(main.css);
+.title {
+    margin: 50px auto;
+    text-align: center;
+    font-weight: 500;
+}
+
+.cards-wrapper {
+    margin: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.card {
+    padding: 50px;
+    box-shadow: var(--shadow);
+    background-color: white;
+}
+
+.card .img {
+    margin: 0 auto 25px auto;
+    width: 100px;
+    height: 100px;
+}
+
+.card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    object-fit: contain;
+    box-shadow: var(--shadow-2);
+}
+
+.card .name {
+    margin: 0;
+    text-align: center;
+    font-weight: 400;
+    font-size: 28px;
+}
+
+.card .description {
+    margin: 0 auto 40px auto;
+    text-align: center;
+    color: #4b5563;
+}
+
+.social-link {
+    text-align: center;
+}
+
+.social-link i {
+    padding: 8px 12px;
+    font-size: 20px;
+    border-radius: 5px;
+    color: var(--primary);
+    background-color: var(--secondary);
+}
+
+.social-link i:hover {
+    color: white;
+    background-color: var(--primary);
+}
