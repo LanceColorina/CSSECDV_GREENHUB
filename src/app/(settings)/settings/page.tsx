@@ -28,9 +28,6 @@ export default function Settings() {
   const getUser = async () => {
     try {
       const response = await axios.get("/api/users/get-profile-info");
-      if(response.data.user.role == "viewer"){
-        router.push("/");
-      }
       setUser(response.data.user);
     } catch (error) {
       router.push("/");

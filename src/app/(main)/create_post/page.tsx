@@ -1,6 +1,6 @@
 "use client";
 import "../../../../styles/create_post.css";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
@@ -13,6 +13,26 @@ function CreatePost() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [imageResponse, setImageResponse] = useState<any>(null);
+
+  // Check user role on component mount
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const response = await axios.get("/api/users/get-profile-info");
+        const user = response.data.user; // Assuming the response contains user data
+
+        // Redirect if the user is not an admin
+        if (user.role == "viewer") {
+          router.push("/"); // Redirect to home if not admin
+        }
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+        router.push("/"); // Redirect to home on error
+      }
+    };
+
+    checkUser();
+  }, [router]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
