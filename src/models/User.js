@@ -10,6 +10,12 @@ const userSchema = new Schema(
     email: { type: String, unique: true, required: true },
     password: { type: String, required: false },
     bio: { type: String, required: true },
+    role: {
+      type: String,
+      enum: ["admin", "user", "viewer"], // Restricts to these values
+      default: "viewer", // Default role if none is specified
+      required: true,
+    },
     image: {
       type: [String],
       required: false,

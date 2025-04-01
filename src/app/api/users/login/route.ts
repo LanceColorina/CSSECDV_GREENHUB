@@ -16,7 +16,6 @@ export const POST = async (request: any) => {
     if (!user) {
       return new NextResponse("User does not exist", { status: 400 });
     }
-    console.log("hello world");
 
     // Check if password is correct
     const validPassword = await bcrypt.compare(password, user.password);
@@ -32,6 +31,7 @@ export const POST = async (request: any) => {
       firstName: user.firstName,
       lastName: user.lastName,
       bio: user.bio,
+      role: user.role
     };
 
     const rememberMePeriod = "21d";

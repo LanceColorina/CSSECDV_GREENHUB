@@ -6,7 +6,7 @@ import React, { FormEvent, useEffect, useState } from "react";
 import axios from "axios";
 import { UploadButton } from "@/utils/uploadthing";
 import "@uploadthing/react/styles.css";
-
+import { useRouter } from "next/navigation";
 interface User {
   _id: string;
   username: string;
@@ -20,6 +20,7 @@ interface User {
 export default function Settings() {
   const [currentUser, setUser] = useState<User>();
   const [editHidden, setEditHidden] = useState(true);
+  const router = useRouter();
   useEffect(() => {
     getUser();
   }, []);
@@ -27,8 +28,12 @@ export default function Settings() {
   const getUser = async () => {
     try {
       const response = await axios.get("/api/users/get-profile-info");
+      if(response.data.user.role == "viewer"){
+        router.push("/");
+      }
       setUser(response.data.user);
     } catch (error) {
+      router.push("/");
       console.error("Error fetching user details:", error);
     }
   };

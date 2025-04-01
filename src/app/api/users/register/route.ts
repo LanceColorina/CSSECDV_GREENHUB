@@ -13,6 +13,11 @@ export const POST = async (request: any) => {
   if (existingUser) {
     return new NextResponse("Email is already in use", { status: 400 });
   }
+  let role = "viewer";
+
+  if (email.endsWith("@dlsu.edu.ph")) {
+    role = "user"; // You can adjust this logic to fit your needs
+  }
 
   const hashedPassword = await bcrypt.hash(password, 5);
 
@@ -23,6 +28,7 @@ export const POST = async (request: any) => {
     email,
     password: hashedPassword,
     bio,
+    role
   });
 
   try {

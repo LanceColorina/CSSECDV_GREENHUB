@@ -1,6 +1,10 @@
+"use client";
 import "../../../styles/admin.css";
+import React, { useEffect, useState, FormEvent } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Admin() {
+  const router = useRouter();
   return (
     <>
       <h2>Admin Dashboard</h2>

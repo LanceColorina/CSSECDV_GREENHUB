@@ -8,6 +8,19 @@ export default function Signup() {
   const [error, setError] = useState("");
   const router = useRouter();
 
+  const validatePassword = (password: string) => {
+    // Password length must be at least 8 characters
+    const lengthValid = password.length >= 8;
+    // Password must include at least one uppercase, one lowercase, one number, and one special character
+    const complexityValid =
+      /[A-Z]/.test(password) && // Contains at least one uppercase letter
+      /[a-z]/.test(password) && // Contains at least one lowercase letter
+      /\d/.test(password) && // Contains at least one number
+      /[!@#$%^&*(),.?":{}|<>]/.test(password); // Contains at least one special character
+
+    return lengthValid && complexityValid;
+  };
+  
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -16,10 +29,17 @@ export default function Signup() {
     const lastName = formData.get("lastName");
     const username = formData.get("username");
     const email = formData.get("email");
-    const password = formData.get("password");
+    const password = formData.get("password") as string;
     const confirmPassword = formData.get("confirmPassword");
     if (password !== confirmPassword) {
       setError("Passwords don't match!");
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      setError(
+        "Password must be at least 8 characters long and include an uppercase and lowercase letter, a number, and a special character."
+      );
       return;
     }
 

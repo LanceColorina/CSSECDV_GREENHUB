@@ -28,8 +28,7 @@ export default function Login() {
       console.log("Login success", response.data);
       router.push("/");
     } catch (error: any) {
-      console.log("Login failed", error.response.data);
-      toast.error(error.response.data);
+      toast.error("Invalid username and/or password");
     } finally {
       setLoading(false);
     }
