@@ -23,6 +23,8 @@ const userSchema = new Schema(
         "https://utfs.io/f/78e7af3d-1649-4e7e-aa89-de25e53b114f-566rf9.jpeg",
       ],
     },
+    failedLoginAttempts: { type: Number, default: 0 }, // Track failed attempts
+    lockUntil: { type: Date, default: null }, // Track time until account is unlocked
   },
   { timestamps: true }
 );

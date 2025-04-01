@@ -28,7 +28,21 @@ export default function Login() {
       console.log("Login success", response.data);
       router.push("/");
     } catch (error: any) {
-      toast.error("Invalid username and/or password");
+      // Check if the error response exists and handle it accordingly
+      if (error.response) {
+        const { status, data } = error.response;
+
+        // Handle locked account
+        if (status === 403 && data.message.includes("Account is temporarily locked")) {
+          toast.error(`Account is temporarily locked. Please try again after ${new Date(data.lockUntil).toLocaleString()}.`);
+        } else {
+          // Handle other errors (e.g., invalid credentials)
+          toast.error(data.message || "Invalid username and/or password");
+        }
+      } else {
+        // Handle network errors or other unexpected errors
+        toast.error("An unexpected error occurred. Please try again later.");
+      }
     } finally {
       setLoading(false);
     }
@@ -41,7 +55,7 @@ export default function Login() {
       </div>
       <div className="login-container">
         <h1>{loading ? "Processing..." : "Login"}</h1>
-        <form action="" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <div className="field">
             <label htmlFor="Email">Email</label>
             <input
@@ -49,6 +63,7 @@ export default function Login() {
               placeholder="Enter email"
               type="text"
               name="email"
+              required
             />
           </div>
           <div className="field">
@@ -58,6 +73,7 @@ export default function Login() {
               placeholder="Enter password"
               type="password"
               name="password"
+              required
             />
           </div>
           <div className="other-options">
@@ -70,7 +86,7 @@ export default function Login() {
               <label htmlFor="rememberMeCheckbox">Remember me</label>
             </div>
           </div>
-          <button type="submit" className="button-registration">
+          <button type="submit" className="button-registration" disabled={loading}>
             Log in
           </button>
         </form>
