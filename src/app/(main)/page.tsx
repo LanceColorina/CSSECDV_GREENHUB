@@ -63,6 +63,7 @@ export default function Home() {
     } finally {
     }
   };
+  
   const getPostByDate = async () => {
     try {
        const response = await axios.get("/api/posts/get-all-post-by-date?param=none");

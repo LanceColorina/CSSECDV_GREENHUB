@@ -21,9 +21,9 @@ function CreatePost() {
         const response = await axios.get("/api/users/get-profile-info");
         const user = response.data.user; // Assuming the response contains user data
 
-        // Redirect if the user is not an admin
+        // Redirect if the user is a viewer
         if (user.role == "viewer") {
-          router.push("/"); // Redirect to home if not admin
+          router.push("/"); // Redirect to home if a viewer
         }
       } catch (error) {
         console.error("Error fetching user details:", error);

@@ -11,18 +11,14 @@ export default function Admin() {
   const getUser  = async () => {
     try {
       const response = await axios.get("/api/users/get-profile-info");
-
       // Check if the user role is admin
       if (response.data.user.role !== "admin") {
         router.push("/"); // Redirect to home if not admin
-      } else {
-        console.log("User  is admin, access granted.");
       }
+      setLoading(false); // Set loading to false after fetching
     } catch (error) {
       console.error("Error fetching user details:", error);
       router.push("/"); // Redirect to home on error
-    } finally {
-      setLoading(false); // Set loading to false after fetching
     }
   };
 

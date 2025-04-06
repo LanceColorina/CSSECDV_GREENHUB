@@ -27,9 +27,9 @@ export const POST = async (request: Request) => {
     if (user.lockUntil && user.lockUntil > Date.now()) {
       return new NextResponse(
         JSON.stringify({
-          message: `Account is temporarily locked. Please try again after 30 mins.`,
+          message: `Account is temporarily locked. Please try again after 30 mins.`, lockUntil : user.lockUntil
         }),
-        { status: 403 }
+        { status: 403 },
       );
     }
 

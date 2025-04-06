@@ -31,7 +31,7 @@ export default function Login() {
       // Check if the error response exists and handle it accordingly
       if (error.response) {
         const { status, data } = error.response;
-
+        console.log(data.lockUntil);
         // Handle locked account
         if (status === 403 && data.message.includes("Account is temporarily locked")) {
           toast.error(`Account is temporarily locked. Please try again after ${new Date(data.lockUntil).toLocaleString()}.`);
