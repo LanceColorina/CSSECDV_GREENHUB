@@ -5,7 +5,15 @@ import { NextResponse } from "next/server";
 
 export const POST = async (request: any) => {
   const body = await request.json();
-  const { firstName, lastName, username, email, password, bio } = body;
+  const { 
+    firstName, 
+    lastName, 
+    username, 
+    email, 
+    password, 
+    bio,
+    securityQuestions 
+  } = body;
 
   await connect();
 
@@ -13,13 +21,29 @@ export const POST = async (request: any) => {
   if (existingUser) {
     return new NextResponse("Email is already in use", { status: 400 });
   }
-  let role = "viewer";
 
+  let role = "viewer";
   if (email.endsWith("@dlsu.edu.ph")) {
-    role = "user"; // You can adjust this logic to fit your needs
+    role = "user";
   }
 
   const hashedPassword = await bcrypt.hash(password, 5);
+  
+  // Hash the security question answers
+  const hashedSecurityQuestions = {
+    question1: {
+      question: securityQuestions.question1.question,
+      answer: await bcrypt.hash(securityQuestions.question1.answer, 5)
+    },
+    question2: {
+      question: securityQuestions.question2.question,
+      answer: await bcrypt.hash(securityQuestions.question2.answer, 5)
+    },
+    question3: {
+      question: securityQuestions.question3.question,
+      answer: await bcrypt.hash(securityQuestions.question3.answer, 5)
+    }
+  };
 
   const newUser = new User({
     firstName,
@@ -28,12 +52,13 @@ export const POST = async (request: any) => {
     email,
     password: hashedPassword,
     bio,
-    role
+    role,
+    securityQuestions: hashedSecurityQuestions
   });
 
   try {
     await newUser.save();
-    return new NextResponse("user is registered", { status: 200 });
+    return new NextResponse("User is registered", { status: 200 });
   } catch (err: any) {
     return new NextResponse(err, {
       status: 500,
