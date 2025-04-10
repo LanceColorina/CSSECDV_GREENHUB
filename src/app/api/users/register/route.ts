@@ -28,6 +28,7 @@ export const POST = async (request: any) => {
   }
 
   const hashedPassword = await bcrypt.hash(password, 5);
+  const lastPasswordReset = new Date();
   
   // Hash the security question answers
   const hashedSecurityQuestions = {
@@ -53,7 +54,8 @@ export const POST = async (request: any) => {
     password: hashedPassword,
     bio,
     role,
-    securityQuestions: hashedSecurityQuestions
+    securityQuestions: hashedSecurityQuestions,
+    lastPasswordReset
   });
 
   try {

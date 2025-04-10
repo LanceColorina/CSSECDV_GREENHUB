@@ -20,6 +20,7 @@ export default function ForgotPassword() {
     answer2: "",
     answer3: "",
   });
+  const [passwordRecentlyChanged, setPasswordRecentlyChanged] = useState(false);
 
   const handleGetQuestions = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,15 +31,28 @@ export default function ForgotPassword() {
 
     try {
       setLoading(true);
-      const res = await fetch(
+      // First check password age
+      const ageCheckRes = await fetch(
+        `/api/users/check-password-age?email=${encodeURIComponent(email)}`
+      );
+      const ageCheckData = await ageCheckRes.json();
+
+      if (ageCheckRes.status === 200 && ageCheckData.tooRecent) {
+        setPasswordRecentlyChanged(true);
+        toast.error("Password was recently changed. Please wait at least 24 hours before resetting.");
+        return;
+      }
+
+      // If password is not recent, proceed with security questions
+      const questionsRes = await fetch(
         `/api/users/get-security-questions?email=${encodeURIComponent(email)}`
       );
-      const data = await res.json();
+      const questionsData = await questionsRes.json();
 
-      if (res.status === 200) {
-        setQuestions(data);
+      if (questionsRes.status === 200) {
+        setQuestions(questionsData);
       } else {
-        toast.error(data.error || "Failed to get security questions");
+        toast.error(questionsData.error || "Failed to get security questions");
       }
     } catch (error) {
       toast.error("An error occurred. Please try again.");

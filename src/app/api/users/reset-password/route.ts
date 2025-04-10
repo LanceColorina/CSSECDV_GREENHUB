@@ -43,6 +43,7 @@ export async function POST(request: Request) {
     // Hash and update password
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     user.password = hashedPassword;
+    user.lastPasswordReset = new Date();
     user.passwordResetToken = undefined;
     user.passwordResetTokenExpiry = undefined;
     user.failedLoginAttempts = 0; // Reset failed attempts if any
