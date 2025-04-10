@@ -12,8 +12,8 @@ const userSchema = new Schema(
     bio: { type: String, required: true },
     role: {
       type: String,
-      enum: ["admin", "user", "viewer"], // Restricts to these values
-      default: "viewer", // Default role if none is specified
+      enum: ["admin", "user", "viewer"],
+      default: "viewer",
       required: true,
     },
     image: {
@@ -23,8 +23,28 @@ const userSchema = new Schema(
         "https://utfs.io/f/78e7af3d-1649-4e7e-aa89-de25e53b114f-566rf9.jpeg",
       ],
     },
-    failedLoginAttempts: { type: Number, default: 0 }, // Track failed attempts
-    lockUntil: { type: Date, default: null }, // Track time until account is unlocked
+    failedLoginAttempts: { type: Number, default: 0 },
+    lockUntil: { type: Date, default: null },
+    // Exactly 3 security questions in order (Question 1, Question 2, Question 3)
+    securityQuestions: {
+      question1: {
+        question: { type: String, required: true },
+        answer: { type: String, required: true },
+      },
+      question2: {
+        question: { type: String, required: true },
+        answer: { type: String, required: true },
+      },
+      question3: {
+        question: { type: String, required: true },
+        answer: { type: String, required: true },
+      },
+    },
+    // Password reset tracking
+    passwordResetAttempts: { type: Number, default: 0 },
+    lastPasswordReset: { type: Date, default: null },
+    passwordResetToken: { type: String, default: null },
+    passwordResetTokenExpiry: { type: Date, default: null },
   },
   { timestamps: true }
 );

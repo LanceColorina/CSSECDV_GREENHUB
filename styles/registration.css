@@ -87,3 +87,112 @@ h1 {
     color: var(--primary);
     background-color: var(--secondary);
 }
+
+/* Security Questions Section Styles */
+.security-questions {
+    margin: 30px 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: var(--shadow-2);
+}
+
+.security-questions h3 {
+    margin: 0 0 15px 0;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.security-questions p {
+    margin: 0 0 20px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.security-question-select {
+    padding: 10px;
+    width: 350px;
+    border: none;
+    background-color: white;
+    box-shadow: var(--shadow-2);
+    margin-bottom: 10px;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 1em;
+}
+
+.security-answer-input {
+    padding: 10px;
+    width: 350px;
+    border: none;
+    background-color: white;
+    box-shadow: var(--shadow-2);
+}
+
+/* Error Message Styles */
+.error-message {
+    color: #e74c3c;
+    text-align: center;
+    margin: 15px 0;
+    font-size: 14px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .login-container {
+        padding: 50px;
+        width: 90%;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .field input,
+    .security-question-select,
+    .security-answer-input,
+    .button-registration {
+        width: 100%;
+    }
+
+    .security-questions {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 30px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}
+
+/* Add to existing CSS */
+.password-field {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.forgot-password {
+    position: absolute;
+    right: 0;
+    bottom: -20px;
+    font-size: 13px;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Adjust other-options margin to account for the forgot password link */
+.other-options {
+    margin-bottom: 30px; /* Reduced from 40px to account for the link */
+}
