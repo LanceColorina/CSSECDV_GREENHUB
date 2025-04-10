@@ -18,27 +18,50 @@ export default function Login() {
     const password = formData.get("password");
     const rememberMe = formData.get("rememberMe");
 
+    // ✅ 2.4.5 Log input validation failures
+    if (!email || !password) {
+      toast.error("Email and password are required.");
+      console.warn(`[VALIDATION ERROR] Missing email or password at ${new Date().toISOString()}`);
+      return;
+    }
+
     try {
       setLoading(true);
+
       const response = await axios.post("/api/users/login", {
         email,
         password,
         rememberMe,
       });
-      console.log("Login success", response.data);
+
+      // ✅ 2.4.3: Log successful login
+      // router.prefetch("/");
+      console.log("Login successful for:", email);
       router.push("/");
     } catch (error: any) {
+      setLoading(false);
+      
       if (error.response) {
         const { status, data } = error.response;
         console.log(data.lockUntil);
+
         if (status === 403 && data.message.includes("Account is temporarily locked")) {
-          toast.error(`Account is temporarily locked. Please try again after ${new Date(data.lockUntil).toLocaleString()}.`);
+          // ✅ 2.4.2: Generic message
+          toast.error(`Your account is temporarily locked.  Please try again after ${new Date(data.lockUntil).toLocaleString()}.`);
+          // ✅ 2.4.3 & 2.4.6: Log security failure
+          console.warn(`[SECURITY EVENT] Locked account login attempt: ${email} at ${new Date().toISOString()}`);
         } else {
-          toast.error(data.message || "Invalid username and/or password");
+          toast.error("Invalid login credentials. Please try again.");
+          // ✅ 2.4.6: Log auth failure
+          console.warn(`[AUTH FAILURE] Failed login attempt for email: ${email}`);
         }
       } else {
-        toast.error("An unexpected error occurred. Please try again later.");
+        // ✅ 2.4.1: Generic message
+        toast.error("Something went wrong. Please try again later."); 
+        // ✅ 2.4.1: Hide stack trace from user
+        console.error(`[SERVER ERROR] Login request failed at ${new Date().toISOString()}:`, error.message);
       }
+
     } finally {
       setLoading(false);
     }
