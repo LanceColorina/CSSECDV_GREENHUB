@@ -172,3 +172,27 @@ h1 {
         font-size: 24px;
     }
 }
+
+/* Add to existing CSS */
+.password-field {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.forgot-password {
+    position: absolute;
+    right: 0;
+    bottom: -20px;
+    font-size: 13px;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Adjust other-options margin to account for the forgot password link */
+.other-options {
+    margin-bottom: 30px; /* Reduced from 40px to account for the link */
+}

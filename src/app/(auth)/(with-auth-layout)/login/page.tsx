@@ -28,19 +28,15 @@ export default function Login() {
       console.log("Login success", response.data);
       router.push("/");
     } catch (error: any) {
-      // Check if the error response exists and handle it accordingly
       if (error.response) {
         const { status, data } = error.response;
         console.log(data.lockUntil);
-        // Handle locked account
         if (status === 403 && data.message.includes("Account is temporarily locked")) {
           toast.error(`Account is temporarily locked. Please try again after ${new Date(data.lockUntil).toLocaleString()}.`);
         } else {
-          // Handle other errors (e.g., invalid credentials)
           toast.error(data.message || "Invalid username and/or password");
         }
       } else {
-        // Handle network errors or other unexpected errors
         toast.error("An unexpected error occurred. Please try again later.");
       }
     } finally {
@@ -66,7 +62,7 @@ export default function Login() {
               required
             />
           </div>
-          <div className="field">
+          <div className="field password-field">
             <label htmlFor="password">Password</label>
             <input
               id="password"
@@ -75,6 +71,9 @@ export default function Login() {
               name="password"
               required
             />
+            <Link href="/forgot-password" className="forgot-password">
+              Forgot password?
+            </Link>
           </div>
           <div className="other-options">
             <div>
