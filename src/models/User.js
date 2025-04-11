@@ -55,7 +55,7 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: false,
+      required: true,
       validate: {
         validator: validatePassword,
         message:
@@ -64,7 +64,7 @@ const userSchema = new Schema(
     },
     bio: {
       type: String,
-      required: [true, "Bio is required"],
+      required: [false, "Bio is required"],
       trim: true,
       maxlength: [500, "Bio cannot exceed 500 characters"],
     },

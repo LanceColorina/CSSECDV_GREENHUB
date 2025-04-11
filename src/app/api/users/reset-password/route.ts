@@ -3,11 +3,18 @@ import { NextResponse } from 'next/server';
 import User from '@/models/User';
 import connect from '@/utils/db';
 import bcrypt from 'bcryptjs';
+import { sendEmail } from "@/helpers/alertEmail";
 
 export async function POST(request: Request) {
   try {
     const { token, newPassword } = await request.json();
-
+    const sendResetFailureEmail = async (email: string) => {
+      await sendEmail({
+        to: email,
+        subject: "Password Reset Attempt Failed",
+        text: "A password reset was attempted using your email, but the reset token was invalid or expired. If you didn't request this, you can ignore this message.",
+      });
+    };
     // Validate input
     if (!token || !newPassword) {
       return NextResponse.json(
@@ -34,6 +41,7 @@ export async function POST(request: Request) {
     // Verify new password meets complexity requirements
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
     if (!passwordRegex.test(newPassword)) {
+      sendResetFailureEmail(user.email);
       return NextResponse.json(
         { error: 'Password must be at least 8 characters with uppercase, lowercase, number, and special character' },
         { status: 400 }
@@ -43,6 +51,7 @@ export async function POST(request: Request) {
     // Check if new password matches current password
     const isSameAsCurrent = await bcrypt.compare(newPassword, user.password);
     if (isSameAsCurrent) {
+      sendResetFailureEmail(user.email);
       return NextResponse.json(
         { error: 'New password cannot be the same as your current password' },
         { status: 400 }
@@ -54,6 +63,7 @@ export async function POST(request: Request) {
       for (const oldHash of user.previousPasswords) {
         const isMatch = await bcrypt.compare(newPassword, oldHash);
         if (isMatch) {
+          sendResetFailureEmail(user.email);
           return NextResponse.json(
             { error: 'You cannot reuse a previously used password' },
             { status: 400 }
@@ -65,8 +75,10 @@ export async function POST(request: Request) {
     // Check against other users' passwords (like in registration)
     const allUsers = await User.find({ _id: { $ne: user._id } }).select('password');
     for (const otherUser of allUsers) {
+      
       const isMatch = await bcrypt.compare(newPassword, otherUser.password);
       if (isMatch) {
+        sendResetFailureEmail(user.email);
         return NextResponse.json(
           { error: 'This password is already in use by another account' },
           { status: 400 }

@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Toaster, toast } from "react-hot-toast";
 import "../../../../styles/registration.css";
 import Link from "next/link";
+import axios from "axios";
 
 export default function ResetPassword() {
   const router = useRouter();
@@ -61,6 +62,7 @@ export default function ResetPassword() {
 
       if (res.status === 200) {
         toast.success("Password reset successfully");
+        await axios.get("/api/users/logout");
         router.push("/login");
       } else {
         toast.error(data.error || "Password reset failed");
