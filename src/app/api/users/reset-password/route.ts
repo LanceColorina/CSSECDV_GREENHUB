@@ -21,8 +21,8 @@ export async function POST(request: Request) {
     // Find user with valid reset token
     const user = await User.findOne({
       passwordResetToken: token,
-      passwordResetTokenExpiry: { $gt: Date.now() } // Check if token is still valid
-    });
+      passwordResetTokenExpiry: { $gt: Date.now() }
+    }).select('+password'); // Include password field for comparison
 
     if (!user) {
       return NextResponse.json(
@@ -40,17 +40,65 @@ export async function POST(request: Request) {
       );
     }
 
+    // Check if new password matches current password
+    const isSameAsCurrent = await bcrypt.compare(newPassword, user.password);
+    if (isSameAsCurrent) {
+      return NextResponse.json(
+        { error: 'New password cannot be the same as your current password' },
+        { status: 400 }
+      );
+    }
+
+    // Check against previous passwords (if you store password history)
+    if (user.previousPasswords) {
+      for (const oldHash of user.previousPasswords) {
+        const isMatch = await bcrypt.compare(newPassword, oldHash);
+        if (isMatch) {
+          return NextResponse.json(
+            { error: 'You cannot reuse a previously used password' },
+            { status: 400 }
+          );
+        }
+      }
+    }
+
+    // Check against other users' passwords (like in registration)
+    const allUsers = await User.find({ _id: { $ne: user._id } }).select('password');
+    for (const otherUser of allUsers) {
+      const isMatch = await bcrypt.compare(newPassword, otherUser.password);
+      if (isMatch) {
+        return NextResponse.json(
+          { error: 'This password is already in use by another account' },
+          { status: 400 }
+        );
+      }
+    }
+
     // Hash and update password
     const hashedPassword = await bcrypt.hash(newPassword, 10);
+    
+    // Update user with new password and clear reset token
     user.password = hashedPassword;
     user.lastPasswordReset = new Date();
     user.passwordResetToken = undefined;
     user.passwordResetTokenExpiry = undefined;
-    user.failedLoginAttempts = 0; // Reset failed attempts if any
+    user.failedLoginAttempts = 0;
+    
+    // Add to password history (if implemented)
+    if (user.previousPasswords) {
+      user.previousPasswords.push(user.password); // Store old hash before updating
+      if (user.previousPasswords.length > 5) { // Keep last 5 passwords
+        user.previousPasswords.shift();
+      }
+    }
+
     await user.save();
 
     return NextResponse.json(
-      { success: true, message: 'Password has been reset successfully' },
+      { 
+        success: true, 
+        message: 'Password has been reset successfully' 
+      },
       { status: 200 }
     );
 
