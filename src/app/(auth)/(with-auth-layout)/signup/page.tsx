@@ -6,6 +6,7 @@ import "../../../../../styles/registration.css";
 
 export default function Signup() {
   const [error, setError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const router = useRouter();
 
   const securityQuestions = [
@@ -26,43 +27,118 @@ export default function Signup() {
 
     return lengthValid && complexityValid;
   };
-  
+
+  const validateField = (name: string, value: string) => {
+    const errors: Record<string, string> = {};
+    
+    switch (name) {
+      case 'firstName':
+      case 'lastName':
+        if (!value.trim()) {
+          errors[name] = `${name === 'firstName' ? 'First name' : 'Last name'} is required`;
+        } else if (value.length > 50) {
+          errors[name] = `${name === 'firstName' ? 'First name' : 'Last name'} cannot exceed 50 characters`;
+        }
+        break;
+      
+      case 'username':
+        if (!value.trim()) {
+          errors.username = 'Username is required';
+        } else if (value.length < 3) {
+          errors.username = 'Username must be at least 3 characters long';
+        } else if (value.length > 30) {
+          errors.username = 'Username cannot exceed 30 characters';
+        } else if (!/^[a-zA-Z0-9_]+$/.test(value)) {
+          errors.username = 'Username can only contain letters, numbers and underscores';
+        }
+        break;
+      
+      case 'email':
+        if (!value.trim()) {
+          errors.email = 'Email is required';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          errors.email = 'Please enter a valid email address';
+        }
+        break;
+      
+      case 'password':
+        if (!validatePassword(value)) {
+          errors.password = 'Password must be at least 8 characters long and include an uppercase and lowercase letter, a number, and a special character';
+        }
+        break;
+      
+      case 'confirmPassword':
+        const password = (document.querySelector('input[name="password"]') as HTMLInputElement)?.value;
+        if (value !== password) {
+          errors.confirmPassword = 'Passwords do not match';
+        }
+        break;
+      
+      case 'securityAnswer1':
+      case 'securityAnswer2':
+      case 'securityAnswer3':
+        if (!value.trim()) {
+          errors[name] = 'Answer is required';
+        } else if (value.trim().length < 2) {
+          errors[name] = 'Answer must be at least 2 characters long';
+        }
+        break;
+    }
+    
+    setFieldErrors(prev => ({ ...prev, ...errors }));
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    validateField(name, value);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    if (fieldErrors[name]) {
+      validateField(name, value);
+    }
+  };
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setError("");
+    setFieldErrors({});
 
     const formData = new FormData(event.currentTarget);
-    const firstName = formData.get("firstName");
-    const lastName = formData.get("lastName");
-    const username = formData.get("username");
-    const email = formData.get("email");
-    const password = formData.get("password") as string;
-    const confirmPassword = formData.get("confirmPassword");
+    const formValues = Object.fromEntries(formData.entries());
     
-    // Get security questions
-    const securityQuestions = {
-      question1: {
-        question: formData.get("securityQuestion1"),
-        answer: formData.get("securityAnswer1")
-      },
-      question2: {
-        question: formData.get("securityQuestion2"),
-        answer: formData.get("securityAnswer2")
-      },
-      question3: {
-        question: formData.get("securityQuestion3"),
-        answer: formData.get("securityAnswer3")
+    // Validate all fields before submission
+    let isValid = true;
+    for (const [name, value] of Object.entries(formValues)) {
+      if (typeof value === 'string') {
+        isValid = validateField(name, value) && isValid;
       }
-    };
+    }
 
-    if (password !== confirmPassword) {
-      setError("Passwords don't match!");
+    if (!isValid) {
+      setError("Please correct the errors in the form");
       return;
     }
 
-    if (!validatePassword(password)) {
-      setError(
-        "Password must be at least 8 characters long and include an uppercase and lowercase letter, a number, and a special character."
-      );
+    const { 
+      firstName,
+      lastName,
+      username,
+      email,
+      password,
+      confirmPassword,
+      securityQuestion1,
+      securityQuestion2,
+      securityQuestion3,
+      securityAnswer1,
+      securityAnswer2,
+      securityAnswer3
+    } = formValues;
+
+    if (password !== confirmPassword) {
+      setError("Passwords don't match!");
       return;
     }
 
@@ -79,12 +155,26 @@ export default function Signup() {
           email,
           password,
           bio: " ",
-          securityQuestions
+          securityQuestions: {
+            question1: {
+              question: securityQuestion1,
+              answer: securityAnswer1
+            },
+            question2: {
+              question: securityQuestion2,
+              answer: securityAnswer2
+            },
+            question3: {
+              question: securityQuestion3,
+              answer: securityAnswer3
+            }
+          }
         }),
       });
 
       if (res.status === 400) {
-        setError("This email is already registered");
+        const data = await res.json();
+        setError(data.message || "This email is already registered");
       }
 
       if (res.status === 200) {
@@ -92,8 +182,8 @@ export default function Signup() {
         router.push("/login");
       }
     } catch (error) {
-      setError("Error try again");
-      console.log(error);
+      setError("Error, please try again");
+      console.error(error);
     }
   }
 
@@ -111,7 +201,10 @@ export default function Signup() {
                 type="text"
                 name="firstName"
                 required
+                onBlur={handleBlur}
+                onChange={handleChange}
               />
+              {fieldErrors.firstName && <span className="error-message">{fieldErrors.firstName}</span>}
             </div>
             <div className="field">
               <label htmlFor="lastName">Last Name</label>
@@ -121,7 +214,10 @@ export default function Signup() {
                 type="text"
                 name="lastName"
                 required
+                onBlur={handleBlur}
+                onChange={handleChange}
               />
+              {fieldErrors.lastName && <span className="error-message">{fieldErrors.lastName}</span>}
             </div>
           </div>
           <div className="grid">
@@ -133,7 +229,10 @@ export default function Signup() {
                 type="text"
                 name="username"
                 required
+                onBlur={handleBlur}
+                onChange={handleChange}
               />
+              {fieldErrors.username && <span className="error-message">{fieldErrors.username}</span>}
             </div>
             <div className="field">
               <label htmlFor="email">Email</label>
@@ -143,7 +242,10 @@ export default function Signup() {
                 type="email"
                 name="email"
                 required
+                onBlur={handleBlur}
+                onChange={handleChange}
               />
+              {fieldErrors.email && <span className="error-message">{fieldErrors.email}</span>}
             </div>
           </div>
           <div className="grid">
@@ -151,11 +253,14 @@ export default function Signup() {
               <label htmlFor="password">Password</label>
               <input
                 id="password"
-                placeholder="Enter password"
+                placeholder="Enter password (min 8 chars with uppercase, lowercase, number & special char)"
                 type="password"
                 name="password"
                 required
+                onBlur={handleBlur}
+                onChange={handleChange}
               />
+              {fieldErrors.password && <span className="error-message">{fieldErrors.password}</span>}
             </div>
             <div className="field">
               <label htmlFor="confirmPassword">Confirm Password</label>
@@ -165,7 +270,10 @@ export default function Signup() {
                 type="password"
                 name="confirmPassword"
                 required
+                onBlur={handleBlur}
+                onChange={handleChange}
               />
+              {fieldErrors.confirmPassword && <span className="error-message">{fieldErrors.confirmPassword}</span>}
             </div>
           </div>
 
@@ -190,11 +298,14 @@ export default function Signup() {
               </select>
               <input
                 type="text"
-                placeholder="Your answer"
+                placeholder="Your answer (min 2 characters)"
                 name="securityAnswer1"
                 required
                 className="security-answer-input"
+                onBlur={handleBlur}
+                onChange={handleChange}
               />
+              {fieldErrors.securityAnswer1 && <span className="error-message">{fieldErrors.securityAnswer1}</span>}
             </div>
 
             {/* Question 2 */}
@@ -213,11 +324,14 @@ export default function Signup() {
               </select>
               <input
                 type="text"
-                placeholder="Your answer"
+                placeholder="Your answer (min 2 characters)"
                 name="securityAnswer2"
                 required
                 className="security-answer-input"
+                onBlur={handleBlur}
+                onChange={handleChange}
               />
+              {fieldErrors.securityAnswer2 && <span className="error-message">{fieldErrors.securityAnswer2}</span>}
             </div>
 
             {/* Question 3 */}
@@ -236,18 +350,25 @@ export default function Signup() {
               </select>
               <input
                 type="text"
-                placeholder="Your answer"
+                placeholder="Your answer (min 2 characters)"
                 name="securityAnswer3"
                 required
                 className="security-answer-input"
+                onBlur={handleBlur}
+                onChange={handleChange}
               />
+              {fieldErrors.securityAnswer3 && <span className="error-message">{fieldErrors.securityAnswer3}</span>}
             </div>
           </div>
 
           <button type="submit" className="button-registration">
             Create Account
           </button>
-          <p style={{ textAlign: "center", color: "red" }}>{error && error}</p>
+          {(error || Object.keys(fieldErrors).length > 0) && (
+            <p style={{ textAlign: "center", color: "red" }}>
+              {error || "Please fix the errors in the form"}
+            </p>
+          )}
         </form>
         <p className="note">
           Already have an account? <Link href="/login">Login</Link>
