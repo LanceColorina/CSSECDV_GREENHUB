@@ -9,38 +9,101 @@ import { UploadButton } from "@/utils/uploadthing";
 import Select from "react-select";
 import "@uploadthing/react/styles.css";
 
+// Define type for errors object
+type FormErrors = {
+  title: string;
+  body: string;
+};
+
 function CreatePost() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [imageResponse, setImageResponse] = useState<any>(null);
+  const [errors, setErrors] = useState<FormErrors>({
+    title: "",
+    body: ""
+  });
 
   // Check user role on component mount
   useEffect(() => {
     const checkUser = async () => {
       try {
         const response = await axios.get("/api/users/get-profile-info");
-        const user = response.data.user; // Assuming the response contains user data
+        const user = response.data.user;
 
-        // Redirect if the user is a viewer
         if (user.role == "viewer") {
-          router.push("/"); // Redirect to home if a viewer
+          router.push("/");
         }
       } catch (error) {
         console.error("Error fetching user details:", error);
-        router.push("/"); // Redirect to home on error
+        router.push("/");
       }
     };
 
     checkUser();
   }, [router]);
 
+  const validateField = (name: keyof FormErrors, value: string) => {
+    const newErrors = { ...errors };
+
+    switch (name) {
+      case 'title':
+        if (!value.trim()) {
+          newErrors.title = 'Title is required';
+        } else if (value.length < 5) {
+          newErrors.title = 'Title must be at least 5 characters long';
+        } else if (value.length > 200) {
+          newErrors.title = 'Title cannot exceed 200 characters';
+        } else {
+          newErrors.title = '';
+        }
+        break;
+      
+      case 'body':
+        if (!value.trim()) {
+          newErrors.body = 'Post content is required';
+        } else if (value.length < 10) {
+          newErrors.body = 'Post content must be at least 10 characters long';
+        } else if (value.length > 10000) {
+          newErrors.body = 'Post content cannot exceed 10,000 characters';
+        } else {
+          newErrors.body = '';
+        }
+        break;
+    }
+
+    setErrors(newErrors);
+    return newErrors[name] === '';
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    validateField(name as keyof FormErrors, value);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    if (errors[name as keyof FormErrors]) {
+      validateField(name as keyof FormErrors, value);
+    }
+  };
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
+    
     const formData = new FormData(event.currentTarget);
-    const title = formData.get("title");
-    const body = formData.get("body");
+    const title = formData.get("title") as string;
+    const body = formData.get("body") as string;
     const tags = formData.getAll("tags");
+
+    // Validate fields before submission
+    const isTitleValid = validateField('title', title);
+    const isBodyValid = validateField('body', body);
+
+    if (!isTitleValid || !isBodyValid) {
+      toast.error("Please fix the errors in the form");
+      return;
+    }
 
     try {
       setLoading(true);
@@ -88,25 +151,38 @@ function CreatePost() {
         <form onSubmit={handleSubmit}>
           <div className="field">
             <input
-              id="username"
-              placeholder="Enter title"
+              id="title"
+              placeholder="Enter title (5-200 characters)"
               type="text"
               name="title"
               disabled={loading}
               required
+              onBlur={handleBlur}
+              onChange={handleChange}
             />
+            {errors.title && <span className="error-message">{errors.title}</span>}
           </div>
           <div className="field">
-            <textarea
-              id="paragraph"
-              placeholder="Enter body here..."
-              rows={3}
-              cols={50}
-              name="body"
-              disabled={loading}
-              required
-            ></textarea>
-          </div>
+          <textarea
+            id="body"
+            placeholder="Enter body here... (10-10,000 characters)"
+            rows={3}
+            cols={50}
+            name="body"
+            disabled={loading}
+            required
+            onBlur={handleBlur}
+            onChange={handleChange}
+            style={{
+              resize: 'vertical', // Only allow vertical resizing
+              width: '100%',     // Take full width of container
+              maxWidth: '100%',  // Ensure it doesn't overflow
+              overflowX: 'hidden', // Disable horizontal scrolling
+              whiteSpace: 'pre-wrap', // Maintain word wrapping
+            }}
+          ></textarea>
+          {errors.body && <span className="error-message">{errors.body}</span>}
+        </div>
           <Select
             isMulti
             placeholder="Select tags"
