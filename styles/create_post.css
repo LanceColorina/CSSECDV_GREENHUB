@@ -75,3 +75,20 @@ h1 {
 .tagsSelection {
   font-size: 14px;
 }
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+input:invalid, 
+textarea:invalid {
+  border-color: #dc3545;
+}
+
+input:valid, 
+textarea:valid {
+  border-color: #28a745;
+}

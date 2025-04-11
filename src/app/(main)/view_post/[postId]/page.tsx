@@ -437,6 +437,8 @@ export default function ViewPost({ params }: { params: { postId: string } }) {
                   placeholder="Write a comment..."
                   name="content"
                   id="comment-box"
+                  minLength={1}
+                  maxLength={5000}
                 />
                 <button className="comment-submit" type="submit">
                   <i className="bi bi-send-arrow-down-fill"></i>
@@ -480,6 +482,8 @@ export default function ViewPost({ params }: { params: { postId: string } }) {
                             defaultValue={comment.content}
                             name="comment"
                             id="new-comment"
+                            minLength={1}
+                            maxLength={5000}
                             onChange={handleInputChange}
                           />
                           <button
